@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">НМедиа</string>
     <string name="greeting">Добрый день</string>
+    <string name="avatar_Description">Avatar</string>
 </resources>

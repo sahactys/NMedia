@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/avatar_Image_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/avatar_Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/netology_logo" />
+
+    <TextView
+        android:id="@+id/authorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/avatar_Image_View"
+        app:layout_constraintStart_toEndOf="@+id/avatar_Image_View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/data"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginStart="16dp"
+        android:textSize="28sp"
+        tools:text="Author name"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/authorName"
+        app:layout_constraintStart_toStartOf="@id/authorName"
+        app:layout_constraintEnd_toEndOf="@id/authorName"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_Image_View"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        tools:text="data"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

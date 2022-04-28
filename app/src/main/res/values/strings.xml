@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="greeting">Good afternoon</string>
+    <string name="avatar_Description">Avatar</string>
 
 
 </resources>
