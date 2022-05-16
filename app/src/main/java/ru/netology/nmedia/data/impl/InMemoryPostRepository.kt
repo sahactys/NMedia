@@ -1,36 +1,49 @@
 package ru.netology.nmedia.data.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 
 class InMemoryPostRepository : PostRepository {
-    override val data = MutableLiveData<Post>(
-        Post(
-            id = 1L,
-            "Dmitrii",
-            "Text",
-            "03.05.2022"
-        )
+    override val data = MutableLiveData(
+        List(100) { index ->
+            Post(
+                id = index + 1L,
+                "Netology",
+                "Some random content ${index + 1}",
+                "03.05.2022"
+            )
+        }
     )
+    private val posts get() = checkNotNull(data.value)
 
-    override fun like() {
-        val currentPost = checkNotNull(data.value)
+    override fun like(postId: Long) {
 
-        val likedByMe = currentPost.copy(
-            likedByMe = !currentPost.likedByMe
-        )
-        likedByMe.likes=countLikeByMe(likedByMe.likedByMe,likedByMe.likes)
-        likedByMe.reductionLike = reductionNumbers(likedByMe.likes)
-        data.value = likedByMe
+        data.value = posts.map {
+            if (it.id != postId) it
+            else {
+                it.copy(
+                    likedByMe = !it.likedByMe,
+                    likes = countLikeByMe(it.likedByMe, it.likes),
+                    reductionLike = reductionNumbers(it.likes + 1)
+                )
+
+            }
+
+        }
     }
 
-    override fun share() {
-        val currentPost = checkNotNull(data.value)
-        currentPost.shares +=1
-        currentPost.reductionShare = reductionNumbers(currentPost.shares)
-        data.value = currentPost
+    override fun share(postId: Long) {
+        data.value = posts.map {
+            if (it.id != postId) it
+            else {
+                it.copy(
+                    shares = it.shares + 1,
+                    reductionShare = reductionNumbers(it.shares + 1)
+                )
+            }
+
+        }
     }
 
     private fun countLikeByMe(liked: Boolean, like: Int) =

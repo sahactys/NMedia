@@ -1,6 +1,7 @@
 package ru.netology.nmedia.viewModel
 
 import androidx.lifecycle.ViewModel
+import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
 
@@ -9,6 +10,6 @@ class PostViewModel:ViewModel() {
 
     val data by repository::data
 
-    fun onLikeClick() = repository.like()
-    fun onShareClick() = repository.share()
+    fun onLikeClick(post: Post) = repository.like(post.id)
+    fun onShareClick(post: Post) = repository.share(post.id)
 }
