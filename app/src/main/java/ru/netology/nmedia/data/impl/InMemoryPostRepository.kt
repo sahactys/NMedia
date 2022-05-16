@@ -21,19 +21,16 @@ class InMemoryPostRepository : PostRepository {
         val likedByMe = currentPost.copy(
             likedByMe = !currentPost.likedByMe
         )
+        likedByMe.likes=countLikeByMe(likedByMe.likedByMe,likedByMe.likes)
+        likedByMe.reductionLike = reductionNumbers(likedByMe.likes)
         data.value = likedByMe
-        currentPost.likes=countLikeByMe(currentPost.likedByMe,currentPost.likes)
-        data.value!!.likes=currentPost.likes
-        currentPost.reductionLike = reductionNumbers(currentPost.likes)
-        data.value!!.reductionLike=currentPost.reductionLike
     }
 
     override fun share() {
         val currentPost = checkNotNull(data.value)
         currentPost.shares +=1
-        data.value!!.shares = currentPost.shares
         currentPost.reductionShare = reductionNumbers(currentPost.shares)
-        data.value!!.reductionShare = currentPost.reductionShare
+        data.value = currentPost
     }
 
     private fun countLikeByMe(liked: Boolean, like: Int) =
